@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { HomePage } from "./HomePage";
 
@@ -115,17 +115,44 @@ describe("HomePage", () => {
 			).toBeInTheDocument();
 		}
 		expect(screen.getByText("Drizzle ORM")).toBeInTheDocument();
-		expect(screen.getByRole("link", { name: "Download CV" })).toHaveAttribute(
-			"href",
-			"/titanic-cv.pdf",
-		);
-		expect(screen.getByRole("link", { name: "Email me" })).toHaveAttribute(
-			"href",
-			"mailto:hello@yourdomain.me",
-		);
+		const cvLinks = screen.getAllByRole("link", { name: "Download CV" });
+		expect(cvLinks.length).toBeGreaterThanOrEqual(2);
+		for (const link of cvLinks) {
+			expect(link).toHaveAttribute("href", "/titanic-cv.pdf");
+		}
+		const emailLinks = screen.getAllByRole("link", { name: "Email me" });
+		expect(emailLinks.length).toBeGreaterThanOrEqual(2);
+		for (const link of emailLinks) {
+			expect(link).toHaveAttribute("href", "mailto:titanaprilian73@gmail.com");
+		}
 		expect(
 			screen.getByText("Built by Titan with React and TypeScript."),
 		).toBeInTheDocument();
+	});
+
+	it("renders a closing callout with contact actions before the footer", () => {
+		renderHome();
+		const heading = screen.getByRole("heading", {
+			name: "Let's talk",
+			level: 2,
+		});
+		const card = heading.closest("section");
+		expect(card).not.toBeNull();
+		expect(card).toHaveClass("closing-cta");
+		expect(
+			within(card as HTMLElement).getByRole("link", { name: "Email me" }),
+		).toHaveAttribute("href", "mailto:titanaprilian73@gmail.com");
+		expect(
+			within(card as HTMLElement).getByRole("link", { name: "Download CV" }),
+		).toHaveAttribute("href", "/titanic-cv.pdf");
+		const footer = screen
+			.getByText("Built by Titan with React and TypeScript.")
+			.closest("footer");
+		expect(footer).not.toBeNull();
+		expect(
+			(card as Element).compareDocumentPosition(footer as Node) &
+				Node.DOCUMENT_POSITION_FOLLOWING,
+		).toBeTruthy();
 	});
 
 	it("renders accessible sidebar social icons linking to real profiles", () => {

@@ -8,3 +8,4 @@ export {
 export { SiteLayout, type SiteLayoutProps } from "./SiteLayout";
 export { SkipLink } from "./SkipLink";
 export { ThemeToggle } from "./ThemeToggle";
+export { useActiveSection } from "./useActiveSection";

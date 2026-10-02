@@ -1,5 +1,6 @@
 import { profileSidebar, SiteLayout } from "../layout";
 import { AboutSection } from "./AboutSection";
+import { ClosingCta } from "./ClosingCta";
 import { EducationSection } from "./EducationSection";
 import { Footer } from "./Footer";
 import { ProjectsSection } from "./ProjectsSection";
@@ -23,6 +24,7 @@ export function HomePage() {
 			<ProjectsSection />
 			<SkillsSection />
 			<EducationSection />
+			<ClosingCta />
 			<Footer />
 		</SiteLayout>
 	);

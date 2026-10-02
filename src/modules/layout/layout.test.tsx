@@ -41,6 +41,74 @@ describe("SiteLayout", () => {
 		);
 	});
 
+	it("renders the theme toggle as a floating top-right overlay", () => {
+		renderLayout();
+		const toggle = screen.getByRole("button", { name: /switch to/i });
+		expect(toggle.closest(".theme-toggle-float")).not.toBeNull();
+		expect(toggle.closest("aside")).toBeNull();
+	});
+
+	it("defaults to the first nav item so short top sections stay reachable", () => {
+		expect(
+			(window as unknown as { IntersectionObserver?: unknown })
+				.IntersectionObserver,
+		).toBeUndefined();
+		render(
+			<SiteLayout sidebar={sidebar}>
+				<section id="about">
+					<h2>About</h2>
+				</section>
+				<section id="projects">
+					<h2>Projects</h2>
+				</section>
+			</SiteLayout>,
+		);
+		const about = screen.getByRole("link", { name: "About" });
+		expect(about).toHaveAttribute("aria-current", "true");
+		expect(about).toHaveClass("is-active");
+	});
+
+	it("highlights the in-view section nav item with aria-current", async () => {
+		type Entry = { isIntersecting: boolean; target: Element };
+		let callback: ((entries: Entry[]) => void) | null = null;
+		const observe = vi.fn();
+		vi.stubGlobal(
+			"IntersectionObserver",
+			vi.fn((cb: (entries: Entry[]) => void) => {
+				callback = cb;
+				return { observe, unobserve: vi.fn(), disconnect: vi.fn() };
+			}),
+		);
+		try {
+			render(
+				<SiteLayout sidebar={sidebar}>
+					<section id="about">
+						<h2>About</h2>
+					</section>
+					<section id="projects">
+						<h2>Projects</h2>
+					</section>
+				</SiteLayout>,
+			);
+			expect(observe).toHaveBeenCalledTimes(2);
+			expect(callback).not.toBeNull();
+			const { act } = await import("react");
+			const target = document.getElementById("projects");
+			expect(target).not.toBeNull();
+			act(() => {
+				callback?.([{ isIntersecting: true, target: target as Element }]);
+			});
+			const projects = screen.getByRole("link", { name: "Projects" });
+			expect(projects).toHaveAttribute("aria-current", "true");
+			expect(projects).toHaveClass("is-active");
+			expect(screen.getByRole("link", { name: "About" })).not.toHaveAttribute(
+				"aria-current",
+			);
+		} finally {
+			vi.unstubAllGlobals();
+		}
+	});
+
 	it("toggles data-theme and persists the choice to localStorage", async () => {
 		const user = userEvent.setup();
 		renderLayout();

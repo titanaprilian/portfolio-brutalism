@@ -1,4 +1,5 @@
 export { AboutSection } from "./AboutSection";
+export { ClosingCta } from "./ClosingCta";
 export { EducationSection } from "./EducationSection";
 export { Footer } from "./Footer";
 export { HomePage, homeNav, homeSidebar } from "./HomePage";
