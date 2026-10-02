@@ -13,7 +13,7 @@
 	--color-bg: #f4f3ee;
 	--color-card: #ffffff;
 	--color-ink: #111111;
-	--color-muted: #4a4a4a;
+	--color-muted: #2a2a2a;
 	--color-yellow: #ffe14d;
 	--color-pink: #ff8fb1;
 	--color-blue: #7ab8ff;
@@ -28,7 +28,7 @@
 		--color-bg: #161616;
 		--color-card: #232323;
 		--color-ink: #f4f3ee;
-		--color-muted: #b8b8b0;
+		--color-muted: #c2c2bc;
 	}
 }
 
@@ -39,7 +39,7 @@
 	--bg: #f4f3ee;
 	--card: #ffffff;
 	--ink: #111111;
-	--muted: #4a4a4a;
+	--muted: #2a2a2a;
 	--yellow: #ffe14d;
 	--pink: #ff8fb1;
 	--blue: #7ab8ff;
@@ -52,11 +52,11 @@
 	--bg: #161616;
 	--card: #232323;
 	--ink: #f4f3ee;
-	--muted: #b8b8b0;
+	--muted: #c2c2bc;
 	--color-bg: #161616;
 	--color-card: #232323;
 	--color-ink: #f4f3ee;
-	--color-muted: #b8b8b0;
+	--color-muted: #c2c2bc;
 }
 
 html {
