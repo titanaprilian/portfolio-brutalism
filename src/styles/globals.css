@@ -583,12 +583,13 @@ article[data-slot="card"].standard-card {
 
 .skills {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(3, 1fr);
 	gap: 22px;
 }
 
 .skills .box {
-	padding: 20px 22px;
+	padding: 0;
+	overflow: clip;
 	background: var(--card);
 	border: 3px solid var(--ink);
 	box-shadow: 5px 5px 0 var(--ink);
@@ -599,25 +600,33 @@ article[data-slot="card"].standard-card {
 	transform: translateY(-6px);
 }
 
-.skills .c1 {
+.skills .box-header {
+	padding: 12px 18px;
+	border-bottom: 3px solid var(--ink);
+}
+
+.skills .c1 .box-header {
 	background: var(--blue);
 	color: #111;
 }
 
-.skills .c2 {
+.skills .c2 .box-header {
 	background: var(--pink);
 	color: #111;
 }
 
-.skills .c3 {
+.skills .c3 .box-header {
 	background: var(--green);
 	color: #111;
-	grid-column: 1 / -1;
+}
+
+.skills .box-body {
+	padding: 16px 18px 18px;
 }
 
 .skills h3 {
 	font-size: 19px;
-	margin-bottom: 12px;
+	margin: 0;
 }
 
 .edu {

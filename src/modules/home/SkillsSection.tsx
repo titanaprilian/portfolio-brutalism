@@ -31,13 +31,17 @@ export function SkillsSection() {
 			<div className="skills">
 				{skillBoxes.map((box) => (
 					<div key={box.title} className={`box ${box.className}`}>
-						<h3>{box.title}</h3>
-						<div className="chips">
-							{box.skills.map((skill) => (
-								<Badge key={skill} variant="chip">
-									{skill}
-								</Badge>
-							))}
+						<div className="box-header">
+							<h3>{box.title}</h3>
+						</div>
+						<div className="box-body">
+							<div className="chips">
+								{box.skills.map((skill) => (
+									<Badge key={skill} variant="chip">
+										{skill}
+									</Badge>
+								))}
+							</div>
 						</div>
 					</div>
 				))}
