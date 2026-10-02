@@ -1,0 +1,7 @@
+PROMPT.md
+docs/
+reference/
+node_modules/
+dist/
+.tanstack/
+*.local
