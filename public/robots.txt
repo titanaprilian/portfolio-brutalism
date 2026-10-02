@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://titanic.me/sitemap.xml
+Sitemap: https://titanaprilian.me/sitemap.xml

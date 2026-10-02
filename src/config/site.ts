@@ -14,8 +14,7 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-	// TODO: replace with Titan's real production domain (the `.me` domain)
-	siteUrl: "https://titanic.me",
+	siteUrl: "https://titanaprilian.me",
 	email: "titanaprilian73@gmail.com",
 	// TODO: replace with Titan's real GitHub profile URL
 	githubUrl: "https://github.com/titanaprilian",

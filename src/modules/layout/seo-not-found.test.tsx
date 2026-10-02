@@ -15,13 +15,16 @@ describe("routeHead", () => {
 		expect(by("name", "description")).toBe("Case study.");
 		expect(by("property", "og:title")).toContain("Private Movie");
 		expect(by("property", "og:url")).toBe(
-			"https://titanic.me/projects/private-movie",
+			"https://titanaprilian.me/projects/private-movie",
 		);
-		expect(by("property", "og:image")).toBe("https://titanic.me/og.png");
+		expect(by("property", "og:image")).toBe("https://titanaprilian.me/og.png");
 		expect(by("name", "twitter:card")).toBe("summary_large_image");
-		expect(by("name", "twitter:image")).toBe("https://titanic.me/og.png");
+		expect(by("name", "twitter:image")).toBe("https://titanaprilian.me/og.png");
 		expect(head.links).toEqual([
-			{ rel: "canonical", href: "https://titanic.me/projects/private-movie" },
+			{
+				rel: "canonical",
+				href: "https://titanaprilian.me/projects/private-movie",
+			},
 		]);
 	});
 
@@ -32,8 +35,8 @@ describe("routeHead", () => {
 			title: "404",
 			description: "d",
 		});
-		expect(home.links?.[0]?.href).toBe("https://titanic.me/");
-		expect(notFound.links?.[0]?.href).toBe("https://titanic.me/404");
+		expect(home.links?.[0]?.href).toBe("https://titanaprilian.me/");
+		expect(notFound.links?.[0]?.href).toBe("https://titanaprilian.me/404");
 	});
 });
 
