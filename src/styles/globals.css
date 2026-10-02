@@ -264,14 +264,14 @@ h1 {
 	letter-spacing: -0.02em;
 }
 
-.diagram-placeholder {
+.diagram {
 	margin-top: 16px;
-	padding: 40px 24px;
-	text-align: center;
-	font-weight: 700;
+	width: 100%;
+	height: auto;
+	display: block;
 	background: var(--card);
-	border: 3px dashed var(--ink);
-	color: var(--muted);
+	border: 3px solid var(--ink);
+	box-shadow: 4px 4px 0 var(--ink);
 }
 
 .pip {

@@ -2,6 +2,7 @@ import { Badge } from "../../components/ui/badge";
 import { privateMovieCaseStudy } from "../../content/projects/private-movie";
 import { SectionHeading } from "../../ui/SectionHeading";
 import { profileSidebar, SiteLayout } from "../layout";
+import { PrivateMovieDiagram } from "./PrivateMovieDiagram";
 
 export const caseStudyNav = [
 	{ href: "/", label: "← Back to Home" },
@@ -33,25 +34,17 @@ export function CaseStudyPage() {
 						{section.paragraphs.map((paragraph) => (
 							<p key={paragraph.slice(0, 24)}>{paragraph}</p>
 						))}
-						{section.id === "architecture" ? (
-							<div
-								className="diagram-placeholder"
-								role="img"
-								aria-label="Architecture diagram placeholder"
-							>
-								Architecture diagram — coming soon
-							</div>
-						) : null}
+						{section.id === "architecture" ? <PrivateMovieDiagram /> : null}
 					</section>
 				))}
 				<section aria-label="Project links">
 					<SectionHeading>Links</SectionHeading>
 					<div className="cta">
-						{study.links.map((link) =>
+						{study.links.map((link, index) =>
 							link.external ? (
 								<a
 									key={link.label}
-									className="link"
+									className={index === 0 ? "btn" : "btn alt"}
 									href={link.href}
 									target="_blank"
 									rel="noopener noreferrer"
@@ -59,7 +52,11 @@ export function CaseStudyPage() {
 									{link.label}
 								</a>
 							) : (
-								<a key={link.label} className="link" href={link.href}>
+								<a
+									key={link.label}
+									className={index === 0 ? "btn" : "btn alt"}
+									href={link.href}
+								>
 									{link.label}
 								</a>
 							),

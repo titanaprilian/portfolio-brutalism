@@ -26,7 +26,7 @@ export const siteConfig: SiteConfig = {
 	role: "Junior full-stack developer",
 	tagline: "I build web apps in TypeScript, from the database to the screen.",
 	availability: "Available now for roles and internships",
-	livePrivateMovieUrl: "https://private-movie.titanic.me",
+	livePrivateMovieUrl: "https://pmov.titanaprilian.me",
 	pylearnFeRepoUrl: "https://github.com/titanaprilian/pylearn-fe",
 	monorepoStarterRepoUrl: "https://github.com/titanaprilian/monorepo-starter",
 };
