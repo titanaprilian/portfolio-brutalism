@@ -17,7 +17,7 @@ export const featuredProject: Project = {
 	tags: ["Android TV", "Admin web UI", "TypeScript"],
 	href: "/projects/private-movie",
 	external: false,
-	linkLabel: "Read the case study",
+	linkLabel: "Read the case study →",
 	live: true,
 	imageSrc: "/projects/private-movie-preview.webp",
 	imageAlt:
@@ -33,7 +33,7 @@ export const otherProjects: Project[] = [
 		// TODO: wired to siteConfig.monorepoBackendRepoUrl in ProjectsSection
 		href: "https://github.com/titanaprilian/monorepo-backend",
 		external: true,
-		linkLabel: "View the repo",
+		linkLabel: "View the repo →",
 	},
 	{
 		title: "Multi-agent workflow",
@@ -43,6 +43,6 @@ export const otherProjects: Project[] = [
 		// TODO: wired to siteConfig.multiAgentWorkflowRepoUrl in ProjectsSection
 		href: "https://github.com/titanaprilian/multi-agent-workflow",
 		external: true,
-		linkLabel: "View the repo",
+		linkLabel: "View the repo →",
 	},
 ];

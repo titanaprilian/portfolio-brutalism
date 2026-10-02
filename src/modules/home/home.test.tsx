@@ -48,10 +48,10 @@ describe("HomePage", () => {
 	it("links the featured card to the case study and others to GitHub", () => {
 		renderHome();
 		expect(
-			screen.getByRole("link", { name: "Read the case study" }),
+			screen.getByRole("link", { name: "Read the case study →" }),
 		).toHaveAttribute("href", "/projects/private-movie");
 		expect(screen.getByText("Live now")).toBeInTheDocument();
-		const repoLinks = screen.getAllByRole("link", { name: "View the repo" });
+		const repoLinks = screen.getAllByRole("link", { name: "View the repo →" });
 		expect(repoLinks).toHaveLength(2);
 		for (const link of repoLinks) {
 			expect(link).toHaveAttribute(
@@ -61,7 +61,7 @@ describe("HomePage", () => {
 			expect(link).toHaveAttribute("rel", "noopener noreferrer");
 		}
 		expect(
-			screen.getByRole("link", { name: "See everything on GitHub" }),
+			screen.getByRole("link", { name: "See everything on GitHub →" }),
 		).toHaveAttribute("href", expect.stringMatching(/^https:\/\//));
 	});
 

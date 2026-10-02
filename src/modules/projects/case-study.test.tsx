@@ -56,7 +56,7 @@ describe("CaseStudyPage", () => {
 
 	it("renders external live and repo links safely", () => {
 		render(<CaseStudyPage />);
-		for (const name of ["Visit the live site", "View the repo"]) {
+		for (const name of ["Visit the live site", "View the repo →"]) {
 			const link = screen.getByRole("link", { name });
 			expect(link).toHaveAttribute(
 				"href",

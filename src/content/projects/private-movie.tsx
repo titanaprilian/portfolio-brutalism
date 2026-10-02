@@ -74,7 +74,7 @@ export const privateMovieCaseStudy: CaseStudy = {
 			external: true,
 		},
 		{
-			label: "View the repo",
+			label: "View the repo →",
 			href: "https://github.com/titanaprilian/private-movie",
 			external: true,
 		},

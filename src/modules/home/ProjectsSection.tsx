@@ -23,7 +23,7 @@ export function ProjectsSection() {
 				target="_blank"
 				rel="noopener noreferrer"
 			>
-				See everything on GitHub
+				See everything on GitHub →
 			</a>
 		</section>
 	);

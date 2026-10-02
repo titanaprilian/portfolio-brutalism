@@ -116,6 +116,42 @@ h3 {
 	z-index: 30;
 }
 
+.theme-toggle-btn {
+	width: 45px;
+	height: 45px;
+	color: var(--ink);
+}
+
+.theme-toggle-icons {
+	position: relative;
+	display: block;
+	width: 22px;
+	height: 22px;
+}
+
+.theme-toggle-icons svg {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition:
+		opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+		transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-toggle-icons .icon-sun {
+	transform: rotate(90deg) scale(0.6);
+}
+
+.theme-toggle-icons .icon-moon {
+	transform: rotate(-90deg) scale(0.6);
+}
+
+.theme-toggle-icons[data-active="light"] .icon-sun,
+.theme-toggle-icons[data-active="dark"] .icon-moon {
+	opacity: 1;
+	transform: none;
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
 	animation: none;
@@ -218,6 +254,17 @@ h1 {
 	height: 10px;
 	background: #111;
 	flex: none;
+	animation: pip-blink 1.6s ease-in-out infinite;
+}
+
+@keyframes pip-blink {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.2;
+	}
 }
 
 .cta {
@@ -256,14 +303,40 @@ h1 {
 
 .social {
 	display: flex;
-	gap: 18px;
+	gap: 12px;
+	flex-wrap: wrap;
 	font-weight: 700;
 	font-size: 15px;
 }
 
 .social a {
-	text-underline-offset: 4px;
-	text-decoration-thickness: 2px;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 12px;
+	background: var(--card);
+	color: var(--ink);
+	text-decoration: none;
+	border: 3px solid var(--ink);
+	box-shadow: 4px 4px 0 var(--ink);
+	transition:
+		transform 0.12s,
+		box-shadow 0.12s;
+}
+
+.social a:hover {
+	transform: translate(2px, 2px);
+	box-shadow: 2px 2px 0 var(--ink);
+}
+
+.social a:active {
+	transform: translate(4px, 4px);
+	box-shadow: 0 0 0 var(--ink);
+}
+
+.social svg {
+	display: block;
+	flex: none;
 }
 
 section {
@@ -320,6 +393,58 @@ article section p + p {
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
+	align-items: flex-start;
+}
+
+article[data-slot="card"].feature-card {
+	padding: 0;
+	gap: 0;
+	overflow: clip;
+}
+
+.feature-card .feature-body {
+	padding: 24px 26px;
+}
+
+.feature-media {
+	display: flex;
+	min-height: 0;
+	overflow: hidden;
+}
+
+.project-shot {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 10;
+	object-fit: cover;
+	background: var(--card);
+	border: 3px solid var(--ink);
+}
+
+.feature-card .project-shot {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	border-bottom: 3px solid var(--ink);
+	object-fit: cover;
+	transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.feature-card:hover .project-shot,
+.feature-card:focus-within .project-shot {
+	transform: scale(1.04);
+}
+
+@media (min-width: 768px) {
+	.feature-card .feature-media {
+		align-self: stretch;
+	}
+	.feature-card .project-shot {
+		aspect-ratio: auto;
+		min-height: 100%;
+		border-bottom: 0;
+		border-right: 3px solid var(--ink);
+	}
 }
 
 .art {
@@ -353,15 +478,6 @@ article section p + p {
 		28px 0 0 #111;
 }
 
-.project-shot {
-	display: block;
-	width: 100%;
-	aspect-ratio: 16 / 10;
-	object-fit: cover;
-	background: var(--card);
-	border: 3px solid var(--ink);
-}
-
 .cards h3 {
 	font-size: 24px;
 }
@@ -383,6 +499,7 @@ article section p + p {
 
 .link {
 	font-weight: 700;
+	text-decoration: underline;
 	text-underline-offset: 4px;
 	text-decoration-thickness: 2px;
 	width: fit-content;
@@ -392,6 +509,7 @@ article section p + p {
 	display: inline-block;
 	margin-top: 26px;
 	font-weight: 700;
+	text-decoration: underline;
 	text-underline-offset: 4px;
 	text-decoration-thickness: 2px;
 }
@@ -407,6 +525,11 @@ article section p + p {
 	background: var(--card);
 	border: 3px solid var(--ink);
 	box-shadow: 5px 5px 0 var(--ink);
+	transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skills .box:hover {
+	transform: translateY(-6px);
 }
 
 .skills .c1 {
@@ -435,6 +558,11 @@ article section p + p {
 	background: var(--card);
 	border: 3px solid var(--ink);
 	box-shadow: 6px 6px 0 var(--ink);
+	transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.edu:hover {
+	transform: translateY(-6px);
 }
 
 .edu h3 {
@@ -506,6 +634,10 @@ footer {
 		transition: none !important;
 		/* biome-ignore lint/complexity/noImportantStyles: required to suppress hover lift/press motion */
 		transform: none !important;
+	}
+	.pip {
+		/* biome-ignore lint/complexity/noImportantStyles: required to keep the status dot solid for reduced motion */
+		animation: none !important;
 	}
 	html {
 		scroll-behavior: auto;

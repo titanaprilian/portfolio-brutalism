@@ -3,7 +3,14 @@ import { Card } from "../../components/ui/card";
 import type { Project } from "./projects";
 
 function ProjectLink({ project }: { project: Project }) {
-	return project.external ? (
+	if (!project.external) {
+		return (
+			<a className="btn" href={project.href}>
+				{project.linkLabel}
+			</a>
+		);
+	}
+	return (
 		<a
 			className="link"
 			href={project.href}
@@ -12,23 +19,21 @@ function ProjectLink({ project }: { project: Project }) {
 		>
 			{project.linkLabel}
 		</a>
-	) : (
-		<a className="link" href={project.href}>
-			{project.linkLabel}
-		</a>
 	);
 }
 
 export function FeaturedProjectCard({ project }: { project: Project }) {
 	return (
-		<Card variant="feature">
+		<Card variant="feature" className="feature-card">
 			{project.imageSrc ? (
-				<img
-					className="project-shot"
-					src={project.imageSrc}
-					alt={project.imageAlt ?? `${project.title} preview`}
-					loading="lazy"
-				/>
+				<div className="feature-media">
+					<img
+						className="project-shot"
+						src={project.imageSrc}
+						alt={project.imageAlt ?? `${project.title} preview`}
+						loading="lazy"
+					/>
+				</div>
 			) : null}
 			<div className="feature-body">
 				{project.live ? <Badge variant="live">Live now</Badge> : null}
