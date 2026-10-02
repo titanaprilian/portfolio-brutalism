@@ -111,16 +111,38 @@ h3 {
 	display: grid;
 	grid-template-columns: 330px 1fr;
 	gap: 64px;
+	position: relative;
+}
+
+.layout::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: color-mix(in srgb, var(--bg) 72%, transparent);
+	pointer-events: none;
+	z-index: 0;
 }
 
 .reading {
 	max-width: 760px;
 	margin: 0 auto;
 	padding: 0 28px;
+	position: relative;
+}
+
+.reading::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: color-mix(in srgb, var(--bg) 72%, transparent);
+	pointer-events: none;
+	z-index: 0;
 }
 
 .reading-top {
 	padding: 44px 0 8px;
+	position: relative;
+	z-index: 1;
 }
 
 .reading-back {
@@ -210,6 +232,7 @@ h3 {
 	gap: 16px;
 	overflow-y: auto;
 	overflow-x: clip;
+	z-index: 1;
 }
 
 .a-top,
@@ -268,6 +291,8 @@ h3 {
 
 main {
 	padding: 44px 0 40px;
+	position: relative;
+	z-index: 1;
 }
 
 h1 {
@@ -779,5 +804,65 @@ footer {
 	}
 	html {
 		scroll-behavior: auto;
+	}
+}
+.engineering-grid-canvas {
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	display: block;
+	pointer-events: none;
+}
+
+/* ── Cursor follower ─────────────────────────────────────────────────── */
+
+.cursor-ring {
+	position: fixed;
+	top: 0;
+	left: 0;
+	/* ring is centred on the pointer via translate – subtract half size */
+	width: 32px;
+	height: 32px;
+	margin-top: -16px;
+	margin-left: -16px;
+	border-radius: 50%;
+	border: 3px solid var(--ink);
+	pointer-events: none;
+	z-index: 9999;
+	opacity: 0;
+	transform: translate(-200px, -200px);
+	transition:
+		opacity 0.2s ease,
+		width 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+		height 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+		margin 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+		border-width 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+		border-color 0.15s ease;
+}
+
+.cursor-ring[data-visible="true"] {
+	opacity: 1;
+}
+
+.cursor-ring[data-hovered="true"] {
+	width: 52px;
+	height: 52px;
+	margin-top: -26px;
+	margin-left: -26px;
+	border-width: 4px;
+	border-color: var(--yellow);
+}
+
+/* Hide on touch devices (pointer: coarse already handled in JS; this is a CSS-level safety net) */
+@media (pointer: coarse) {
+	.cursor-ring {
+		display: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cursor-ring {
+		/* biome-ignore lint/complexity/noImportantStyles: must override the global reduced-motion transition kill */
+		transition: opacity 0.2s ease !important;
 	}
 }

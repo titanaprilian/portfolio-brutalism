@@ -1,4 +1,6 @@
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { CursorFollower } from "../modules/layout/CursorFollower";
+import { EngineeringGrid } from "../modules/layout/EngineeringGrid";
 
 import globalsCss from "../styles/globals.css?url";
 
@@ -32,6 +34,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
+				<EngineeringGrid />
+				<CursorFollower />
 				{children}
 				<Scripts />
 			</body>
