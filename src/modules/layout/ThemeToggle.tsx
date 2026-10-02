@@ -8,17 +8,70 @@ type ViewTransitionDocument = Document & {
 	startViewTransition?: (update: () => void) => ViewTransitionReady;
 };
 
+function resolveTheme(): "light" | "dark" {
+	if (typeof document !== "undefined") {
+		const attr = document.documentElement.dataset.theme;
+		if (attr === "light" || attr === "dark") return attr;
+		try {
+			const saved = localStorage.getItem(STORAGE_KEY);
+			if (saved === "light" || saved === "dark") return saved;
+		} catch {
+			// storage unavailable (private mode) — fall through to media query
+		}
+		if (
+			typeof window.matchMedia === "function" &&
+			window.matchMedia("(prefers-color-scheme: dark)").matches
+		) {
+			return "dark";
+		}
+	}
+	return "light";
+}
+
 function getInitialTheme(): "light" | "dark" | null {
 	if (typeof document === "undefined") return null;
-	const stored = document.documentElement.dataset.theme;
-	if (stored === "light" || stored === "dark") return stored;
-	try {
-		const saved = localStorage.getItem(STORAGE_KEY);
-		if (saved === "light" || saved === "dark") return saved;
-	} catch {
-		return null;
-	}
-	return null;
+	return resolveTheme();
+}
+
+export function SunIcon() {
+	return (
+		<svg
+			className="icon-sun"
+			width="22"
+			height="22"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			aria-hidden="true"
+			focusable="false"
+		>
+			<circle cx="12" cy="12" r="4" />
+			<path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+		</svg>
+	);
+}
+
+export function MoonIcon() {
+	return (
+		<svg
+			className="icon-moon"
+			width="22"
+			height="22"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			aria-hidden="true"
+			focusable="false"
+		>
+			<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+		</svg>
+	);
 }
 
 export function ThemeToggle() {
@@ -26,15 +79,7 @@ export function ThemeToggle() {
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
 	useEffect(() => {
-		const initial = getInitialTheme();
-		if (initial) {
-			setTheme(initial);
-			return;
-		}
-		const dark =
-			typeof window.matchMedia === "function" &&
-			window.matchMedia("(prefers-color-scheme: dark)").matches;
-		setTheme(dark ? "dark" : "light");
+		setTheme(getInitialTheme() ?? "light");
 	}, []);
 
 	function applyTheme(next: "light" | "dark") {
@@ -48,7 +93,8 @@ export function ThemeToggle() {
 	}
 
 	function toggle() {
-		const next = theme === "dark" ? "light" : "dark";
+		const current = theme ?? resolveTheme();
+		const next = current === "dark" ? "light" : "dark";
 		const reduceMotion =
 			typeof window.matchMedia === "function" &&
 			window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -66,26 +112,31 @@ export function ThemeToggle() {
 			Math.max(x, window.innerWidth - x),
 			Math.max(y, window.innerHeight - y),
 		);
-		const vt = transition(() => applyTheme(next));
-		vt.ready
-			.then(() => {
-				document.documentElement.animate(
-					{
-						clipPath: [
-							`circle(0px at ${x}px ${y}px)`,
-							`circle(${endRadius}px at ${x}px ${y}px)`,
-						],
-					},
-					{
-						duration: 550,
-						easing: "ease-out",
-						pseudoElement: "::view-transition-new(root)",
-					},
-				);
-			})
-			.catch(() => {
-				// transition aborted (rapid toggle / tab switch) — theme already applied
-			});
+		try {
+			const vt = transition(() => applyTheme(next));
+			vt.ready
+				.then(() => {
+					document.documentElement.animate(
+						{
+							clipPath: [
+								`circle(0px at ${x}px ${y}px)`,
+								`circle(${endRadius}px at ${x}px ${y}px)`,
+							],
+						},
+						{
+							duration: 550,
+							easing: "ease-out",
+							pseudoElement: "::view-transition-new(root)",
+						},
+					);
+				})
+				.catch(() => {
+					// transition aborted (rapid toggle / tab switch) — theme already applied
+				});
+		} catch {
+			// view transition failed synchronously — fall back to an instant switch
+			applyTheme(next);
+		}
 	}
 
 	return (
@@ -97,9 +148,15 @@ export function ThemeToggle() {
 				theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
 			}
 			aria-pressed={theme === "dark"}
-			className="inline-block self-start cursor-pointer border-3 border-ink bg-card px-[14px] py-[8px] font-body text-[14px] font-bold shadow-[4px_4px_0_var(--ink)] transition-transform transition-shadow duration-120 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_var(--ink)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none motion-reduce:transform-none motion-reduce:transition-none"
+			className="theme-toggle-btn inline-flex cursor-pointer items-center justify-center border-3 border-ink bg-card shadow-[4px_4px_0_var(--ink)] transition-transform transition-shadow duration-120 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_var(--ink)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none motion-reduce:transform-none motion-reduce:transition-none"
 		>
-			{theme === "dark" ? "☀ Light" : "☾ Dark"}
+			<span
+				className="theme-toggle-icons"
+				data-active={theme === "dark" ? "light" : "dark"}
+			>
+				<SunIcon />
+				<MoonIcon />
+			</span>
 		</button>
 	);
 }

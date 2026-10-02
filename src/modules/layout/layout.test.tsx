@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import type { SidebarProps } from "./Sidebar";
 import { SiteLayout } from "./SiteLayout";
 
@@ -53,5 +53,57 @@ describe("SiteLayout", () => {
 		const first = document.documentElement.dataset.theme;
 		await user.click(toggle);
 		expect(document.documentElement.dataset.theme).not.toBe(first);
+	});
+
+	it("swaps the moon icon for the sun icon when switching to dark mode", async () => {
+		const user = userEvent.setup();
+		renderLayout();
+		const toggle = screen.getByRole("button", { name: "Switch to dark mode" });
+		expect(toggle.querySelector(".theme-toggle-icons")).toHaveAttribute(
+			"data-active",
+			"dark",
+		);
+		expect(toggle.querySelector(".icon-moon")).toBeInTheDocument();
+		await user.click(toggle);
+		const toggled = screen.getByRole("button", {
+			name: "Switch to light mode",
+		});
+		expect(toggled.querySelector(".theme-toggle-icons")).toHaveAttribute(
+			"data-active",
+			"light",
+		);
+		expect(toggled.querySelector(".icon-sun")).toBeInTheDocument();
+	});
+
+	it("applies the theme instantly without view transitions", async () => {
+		expect(
+			(document as unknown as { startViewTransition?: unknown })
+				.startViewTransition,
+		).toBeUndefined();
+		const user = userEvent.setup();
+		renderLayout();
+		await user.click(screen.getByRole("button", { name: /switch to/i }));
+		expect(document.documentElement.dataset.theme).toBe("dark");
+		expect(localStorage.getItem("theme")).toBe("dark");
+	});
+
+	it("falls back to an instant switch under reduced motion", async () => {
+		vi.stubGlobal(
+			"matchMedia",
+			vi.fn().mockReturnValue({
+				matches: true,
+				media: "",
+				addEventListener: vi.fn(),
+				removeEventListener: vi.fn(),
+			}),
+		);
+		const user = userEvent.setup();
+		renderLayout();
+		expect(
+			screen.getByRole("button", { name: "Switch to light mode" }),
+		).toBeInTheDocument();
+		await user.click(screen.getByRole("button", { name: /switch to/i }));
+		expect(document.documentElement.dataset.theme).toBe("light");
+		expect(localStorage.getItem("theme")).toBe("light");
 	});
 });

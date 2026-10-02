@@ -25,7 +25,9 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en">
+		// suppressHydrationWarning: THEME_SCRIPT sets data-theme before hydration
+		// from localStorage, which the server can't know — the mismatch is expected.
+		<html lang="en" suppressHydrationWarning>
 			<head>
 				<HeadContent />
 			</head>

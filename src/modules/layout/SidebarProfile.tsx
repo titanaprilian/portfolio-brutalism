@@ -25,8 +25,8 @@ export function SidebarIdentity({ compact = false }: { compact?: boolean }) {
 export function GithubIcon() {
 	return (
 		<svg
-			width="20"
-			height="20"
+			width="28"
+			height="28"
 			viewBox="0 0 24 24"
 			fill="none"
 			stroke="currentColor"
@@ -44,8 +44,8 @@ export function GithubIcon() {
 export function LinkedinIcon() {
 	return (
 		<svg
-			width="20"
-			height="20"
+			width="28"
+			height="28"
 			viewBox="0 0 24 24"
 			fill="none"
 			stroke="currentColor"
@@ -81,6 +81,7 @@ export function SidebarContact() {
 					aria-label="GitHub profile"
 				>
 					<GithubIcon />
+					GitHub
 				</a>
 				<a
 					href={siteConfig.linkedinUrl}
@@ -89,6 +90,7 @@ export function SidebarContact() {
 					aria-label="LinkedIn profile"
 				>
 					<LinkedinIcon />
+					LinkedIn
 				</a>
 			</div>
 		</>
