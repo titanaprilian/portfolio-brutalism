@@ -113,6 +113,32 @@ h3 {
 	gap: 64px;
 }
 
+.reading {
+	max-width: 760px;
+	margin: 0 auto;
+	padding: 0 28px;
+}
+
+.reading-top {
+	padding: 44px 0 8px;
+}
+
+.reading-back {
+	display: inline-block;
+	text-decoration: none;
+	font: 700 18px var(--display);
+	padding: 2px 8px;
+	margin-left: -8px;
+	border: 3px solid transparent;
+	color: var(--ink);
+}
+
+.reading-back:hover {
+	background: var(--yellow);
+	color: #111;
+	border-color: var(--ink);
+}
+
 .theme-toggle-float {
 	position: fixed;
 	top: calc(env(safe-area-inset-top, 0px) + 20px);
@@ -399,6 +425,10 @@ section {
 article section {
 	margin-top: 40px;
 	margin-bottom: 0;
+}
+
+article > .tag {
+	max-width: 60ch;
 }
 
 /* biome-ignore lint/style/noDescendingSpecificity: article and .about selectors never match the same elements */
@@ -705,6 +735,9 @@ footer {
 	.layout {
 		grid-template-columns: 1fr;
 		gap: 0;
+		padding: 0 22px;
+	}
+	.reading {
 		padding: 0 22px;
 	}
 	.site-aside {

@@ -1,7 +1,6 @@
-import { Badge } from "../../components/ui/badge";
 import { privateMovieCaseStudy } from "../../content/projects/private-movie";
 import { SectionHeading } from "../../ui/SectionHeading";
-import { profileSidebar, SiteLayout } from "../layout";
+import { ReadingLayout } from "../layout";
 import { PrivateMovieDiagram } from "./PrivateMovieDiagram";
 
 export const caseStudyNav = [
@@ -15,19 +14,10 @@ export const caseStudyNav = [
 export function CaseStudyPage() {
 	const study = privateMovieCaseStudy;
 	return (
-		<SiteLayout
-			sidebar={profileSidebar(caseStudyNav, { compactIdentity: true })}
-		>
+		<ReadingLayout>
 			<article>
-				<p className="tag">{study.summary}</p>
 				<h1>{study.title}</h1>
-				<div className="tags case-tags">
-					{study.tags.map((tag) => (
-						<Badge key={tag} variant="tag">
-							{tag}
-						</Badge>
-					))}
-				</div>
+				<p className="tag">{study.summary}</p>
 				{study.sections.map((section) => (
 					<section key={section.id} id={section.id}>
 						<SectionHeading>{section.heading}</SectionHeading>
@@ -64,6 +54,6 @@ export function CaseStudyPage() {
 					</div>
 				</section>
 			</article>
-		</SiteLayout>
+		</ReadingLayout>
 	);
 }

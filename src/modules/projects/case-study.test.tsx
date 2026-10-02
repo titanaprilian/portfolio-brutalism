@@ -12,6 +12,21 @@ describe("CaseStudyPage", () => {
 		expect(screen.getByText(/self-hosted movie streaming/)).toBeInTheDocument();
 	});
 
+	it("renders the summary below the title with no tag badges", () => {
+		const { container } = render(<CaseStudyPage />);
+		const article = container.querySelector("article");
+		expect(article).not.toBeNull();
+		const title = screen.getByRole("heading", {
+			name: "Private Movie",
+			level: 1,
+		});
+		const summary = screen.getByText(/self-hosted movie streaming/);
+		expect(title.compareDocumentPosition(summary)).toBe(
+			Node.DOCUMENT_POSITION_FOLLOWING,
+		);
+		expect(container.querySelector(".tags.case-tags")).toBeNull();
+	});
+
 	it("renders all case study section headings", () => {
 		render(<CaseStudyPage />);
 		for (const name of [
@@ -67,23 +82,28 @@ describe("CaseStudyPage", () => {
 		}
 	});
 
-	it("shows back-to-home navigation and section anchors", () => {
+	it("renders a single-column reading layout without the profile sidebar", () => {
+		const { container } = render(<CaseStudyPage />);
+		expect(container.querySelector(".reading")).not.toBeNull();
+		expect(container.querySelector(".layout")).toBeNull();
+		expect(container.querySelector("aside.site-aside")).toBeNull();
+		expect(screen.queryByText("I build web apps in TypeScript")).toBeNull();
+		expect(screen.queryByText(/available now for/i)).toBeNull();
+		expect(screen.queryByRole("link", { name: /github profile/i })).toBeNull();
+	});
+
+	it("shows back-to-home navigation in the reading header", () => {
+		render(<CaseStudyPage />);
+		const back = screen.getByRole("link", { name: "← Back to Home" });
+		expect(back).toHaveAttribute("href", "/");
+		expect(back.closest(".reading-top")).not.toBeNull();
+	});
+
+	it("keeps the theme toggle accessible on the case study page", () => {
 		render(<CaseStudyPage />);
 		expect(
-			screen.getByRole("link", { name: "← Back to Home" }),
-		).toHaveAttribute("href", "/");
-		for (const href of [
-			"#problem",
-			"#role",
-			"#architecture",
-			"#stack",
-			"#outcome",
-		]) {
-			const anchors = document.querySelectorAll(
-				`nav.side-nav a[href="${href}"]`,
-			);
-			expect(anchors.length).toBe(1);
-		}
+			screen.getByRole("button", { name: /switch to/i }),
+		).toBeInTheDocument();
 	});
 
 	it("renders external live and repo links safely", () => {

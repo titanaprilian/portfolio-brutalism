@@ -1,4 +1,5 @@
 export { NotFoundPage } from "./NotFoundPage";
+export { ReadingLayout, type ReadingLayoutProps } from "./ReadingLayout";
 export { type NavLink, Sidebar, type SidebarProps } from "./Sidebar";
 export {
 	profileSidebar,
