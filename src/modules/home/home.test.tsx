@@ -65,6 +65,48 @@ describe("HomePage", () => {
 		).toHaveAttribute("href", expect.stringMatching(/^https:\/\//));
 	});
 
+	it("lists the real project roster with correct repository links", () => {
+		renderHome();
+		expect(
+			screen.getByRole("heading", { name: "Pylearn" }),
+		).toBeInTheDocument();
+		expect(
+			screen.getByRole("heading", { name: "Monorepo Starter" }),
+		).toBeInTheDocument();
+		expect(screen.getByText(/dual roles/)).toBeInTheDocument();
+		expect(screen.getByText(/AI-agent-optimized/)).toBeInTheDocument();
+		expect(
+			screen.getAllByRole("link", { name: "View the repo →" }),
+		).toHaveLength(2);
+		const pylearnLink = screen
+			.getAllByRole("link", { name: "View the repo →" })
+			.find(
+				(link) =>
+					link.getAttribute("href") ===
+					"https://github.com/titanaprilian/pylearn-fe",
+			);
+		expect(pylearnLink).toBeDefined();
+		const monorepoLink = screen
+			.getAllByRole("link", { name: "View the repo →" })
+			.find(
+				(link) =>
+					link.getAttribute("href") ===
+					"https://github.com/titanaprilian/monorepo-starter",
+			);
+		expect(monorepoLink).toBeDefined();
+	});
+
+	it("renders the Pylearn screenshot banner and the monorepo SVG diagram", () => {
+		renderHome();
+		const shot = screen.getByRole("img", { name: /pylearn/i });
+		expect(shot).toHaveAttribute("src", "/projects/pylearn-preview.png");
+		const diagram = screen.getByRole("img", {
+			name: /monorepo starter: apps connect to packages/i,
+		});
+		expect(diagram).toBeInTheDocument();
+		expect(diagram.tagName.toLowerCase()).toBe("svg");
+	});
+
 	it("renders skill boxes, education, CV link, and footer", () => {
 		renderHome();
 		for (const name of ["Backend", "Frontend", "How I work"]) {

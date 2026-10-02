@@ -402,6 +402,73 @@ article[data-slot="card"].feature-card {
 	overflow: clip;
 }
 
+article[data-slot="card"].standard-card {
+	padding: 0;
+	gap: 0;
+	overflow: clip;
+}
+
+.standard-card .standard-body {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	align-items: flex-start;
+	padding: 24px 26px;
+}
+
+.card-banner {
+	overflow: hidden;
+	border-bottom: 3px solid var(--ink);
+}
+
+.card-banner-img,
+.card-banner-diagram {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 7;
+	object-fit: cover;
+}
+
+.card-banner-diagram {
+	background: var(--card);
+}
+
+.diagram-bg {
+	fill: var(--card);
+	stroke: var(--ink);
+}
+
+.diagram-node {
+	stroke: var(--ink);
+}
+
+.diagram-node-apps {
+	fill: var(--yellow);
+}
+
+.diagram-node-packages {
+	fill: var(--blue);
+}
+
+.diagram-node-tooling {
+	fill: var(--pink);
+}
+
+.diagram-arrow {
+	stroke: var(--ink);
+}
+
+.diagram-text {
+	fill: #111111;
+	font-size: 22px;
+}
+
+.diagram-subtext {
+	fill: #111111;
+	font-size: 14px;
+	font-weight: 400;
+}
+
 .feature-card .feature-body {
 	padding: 24px 26px;
 }

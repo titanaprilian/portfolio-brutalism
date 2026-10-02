@@ -9,8 +9,8 @@ export interface SiteConfig {
 	tagline: string;
 	availability: string;
 	livePrivateMovieUrl: string;
-	monorepoBackendRepoUrl: string;
-	multiAgentWorkflowRepoUrl: string;
+	pylearnFeRepoUrl: string;
+	monorepoStarterRepoUrl: string;
 }
 
 export const siteConfig: SiteConfig = {
@@ -26,11 +26,7 @@ export const siteConfig: SiteConfig = {
 	role: "Junior full-stack developer",
 	tagline: "I build web apps in TypeScript, from the database to the screen.",
 	availability: "Available now for roles and internships",
-	// TODO: replace with the real live Private Movie URL
 	livePrivateMovieUrl: "https://private-movie.titanic.me",
-	// TODO: replace with the real Monorepo backend repo URL
-	monorepoBackendRepoUrl: "https://github.com/titanaprilian/monorepo-backend",
-	// TODO: replace with the real Multi-agent workflow repo URL
-	multiAgentWorkflowRepoUrl:
-		"https://github.com/titanaprilian/multi-agent-workflow",
+	pylearnFeRepoUrl: "https://github.com/titanaprilian/pylearn-fe",
+	monorepoStarterRepoUrl: "https://github.com/titanaprilian/monorepo-starter",
 };

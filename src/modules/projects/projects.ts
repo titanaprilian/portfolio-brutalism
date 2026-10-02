@@ -1,3 +1,5 @@
+import { siteConfig } from "../../config/site";
+
 export interface Project {
 	title: string;
 	description: string;
@@ -8,6 +10,8 @@ export interface Project {
 	live?: boolean;
 	imageSrc?: string;
 	imageAlt?: string;
+	diagram?: "monorepo-architecture";
+	diagramLabel?: string;
 }
 
 export const featuredProject: Project = {
@@ -26,23 +30,27 @@ export const featuredProject: Project = {
 
 export const otherProjects: Project[] = [
 	{
-		title: "Monorepo backend",
+		title: "Pylearn",
 		description:
-			"A production-grade API built with Elysia, Bun, Drizzle and Postgres. Code is split into deep modules and covered by three tiers of tests.",
-		tags: ["Elysia", "Bun", "Drizzle", "Postgres"],
-		// TODO: wired to siteConfig.monorepoBackendRepoUrl in ProjectsSection
-		href: "https://github.com/titanaprilian/monorepo-backend",
+			"A learning management system with dual roles: lecturers manage classes and grading while students access materials and quizzes.",
+		tags: ["Next.js", "React", "TypeScript"],
+		href: siteConfig.pylearnFeRepoUrl,
 		external: true,
 		linkLabel: "View the repo →",
+		imageSrc: "/projects/pylearn-preview.png",
+		imageAlt:
+			"Preview of the Pylearn learning management system showing course materials and quiz access",
 	},
 	{
-		title: "Multi-agent workflow",
+		title: "Monorepo Starter",
 		description:
-			"A GitHub-based workflow where AI agents coordinate through SKILL.md files, so work moves between them in a predictable way.",
-		tags: ["GitHub", "SKILL.md", "AI agents"],
-		// TODO: wired to siteConfig.multiAgentWorkflowRepoUrl in ProjectsSection
-		href: "https://github.com/titanaprilian/multi-agent-workflow",
+			"An AI-agent-optimized TypeScript monorepo with apps, shared packages, and tooling/CI wired for predictable agent workflows.",
+		tags: ["TypeScript", "Turborepo", "Bun"],
+		href: siteConfig.monorepoStarterRepoUrl,
 		external: true,
 		linkLabel: "View the repo →",
+		diagram: "monorepo-architecture",
+		diagramLabel:
+			"Architecture diagram of the Monorepo Starter: Apps connect to Packages, which connect to Tooling and CI",
 	},
 ];
