@@ -38,6 +38,13 @@ describe("HomePage", () => {
 		).toBeInTheDocument();
 	});
 
+	it("shows the Private Movie preview screenshot with accessible text", () => {
+		renderHome();
+		const shot = screen.getByRole("img", { name: /private movie/i });
+		expect(shot).toHaveAttribute("src", "/projects/private-movie-preview.webp");
+		expect(shot.getAttribute("alt")).not.toHaveLength(0);
+	});
+
 	it("links the featured card to the case study and others to GitHub", () => {
 		renderHome();
 		expect(

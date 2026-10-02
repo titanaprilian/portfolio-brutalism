@@ -22,7 +22,14 @@ function ProjectLink({ project }: { project: Project }) {
 export function FeaturedProjectCard({ project }: { project: Project }) {
 	return (
 		<Card variant="feature">
-			<div className="art" aria-hidden="true" />
+			{project.imageSrc ? (
+				<img
+					className="project-shot"
+					src={project.imageSrc}
+					alt={project.imageAlt ?? `${project.title} preview`}
+					loading="lazy"
+				/>
+			) : null}
 			<div className="feature-body">
 				{project.live ? <Badge variant="live">Live now</Badge> : null}
 				<h3>{project.title}</h3>

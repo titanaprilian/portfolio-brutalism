@@ -6,6 +6,8 @@ export interface Project {
 	external: boolean;
 	linkLabel: string;
 	live?: boolean;
+	imageSrc?: string;
+	imageAlt?: string;
 }
 
 export const featuredProject: Project = {
@@ -17,6 +19,9 @@ export const featuredProject: Project = {
 	external: false,
 	linkLabel: "Read the case study",
 	live: true,
+	imageSrc: "/projects/private-movie-preview.webp",
+	imageAlt:
+		"Preview of the Private Movie home screen showing a featured animation title with play and more info buttons",
 };
 
 export const otherProjects: Project[] = [
