@@ -25,6 +25,10 @@
 
 @media (prefers-color-scheme: dark) {
 	:root:not([data-theme="light"]) {
+		--bg: #161616;
+		--card: #232323;
+		--ink: #f4f3ee;
+		--muted: #c2c2bc;
 		--color-bg: #161616;
 		--color-card: #232323;
 		--color-ink: #f4f3ee;

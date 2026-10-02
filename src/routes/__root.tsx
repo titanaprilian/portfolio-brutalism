@@ -2,7 +2,7 @@ import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 
 import globalsCss from "../styles/globals.css?url";
 
-const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t}}catch(e){}})();`;
+const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t}else{document.documentElement.dataset.theme=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}}catch(e){}})();`;
 
 export const Route = createRootRoute({
 	head: () => ({
