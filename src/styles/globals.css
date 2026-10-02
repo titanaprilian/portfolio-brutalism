@@ -109,6 +109,27 @@ h3 {
 	gap: 64px;
 }
 
+.theme-toggle-float {
+	position: fixed;
+	top: calc(env(safe-area-inset-top, 0px) + 20px);
+	right: calc(env(safe-area-inset-right, 0px) + 20px);
+	z-index: 30;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation: none;
+	mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+	z-index: 1;
+}
+
+::view-transition-old(root) {
+	z-index: auto;
+}
+
 .site-aside {
 	position: sticky;
 	top: 0;
@@ -122,6 +143,7 @@ h3 {
 	justify-content: space-between;
 	gap: 16px;
 	overflow-y: auto;
+	overflow-x: clip;
 }
 
 .a-top,
@@ -129,6 +151,7 @@ h3 {
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
+	align-items: flex-start;
 }
 
 .side-nav {
@@ -328,6 +351,15 @@ article section p + p {
 	box-shadow:
 		14px 0 0 #111,
 		28px 0 0 #111;
+}
+
+.project-shot {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 10;
+	object-fit: cover;
+	background: var(--card);
+	border: 3px solid var(--ink);
 }
 
 .cards h3 {

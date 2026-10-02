@@ -1,5 +1,3 @@
-import { ThemeToggle } from "./ThemeToggle";
-
 export interface NavLink {
 	href: string;
 	label: string;
@@ -23,10 +21,7 @@ export function Sidebar({ top, nav, navLabel, bottom }: SidebarProps) {
 					</a>
 				))}
 			</nav>
-			<div className="a-bot">
-				{bottom}
-				<ThemeToggle />
-			</div>
+			<div className="a-bot">{bottom}</div>
 		</aside>
 	);
 }
