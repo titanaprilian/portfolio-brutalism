@@ -7,9 +7,9 @@ export const Route = createFileRoute("/")({
 	head: () =>
 		routeHead({
 			path: "/",
-			title: "Titanic | Junior Full-Stack Developer",
+			title: "Titan | Junior Full-Stack Developer",
 			description:
-				"Portfolio of Titanic, junior full-stack developer graduating December 2026. Featured work, skills, and contact links.",
+				"Portfolio of Titan, junior full-stack developer graduating December 2026. Featured work, skills, and contact links.",
 		}),
 });
 

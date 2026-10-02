@@ -1,3 +1,3 @@
 export function Footer() {
-	return <footer>Built by Titanic with React and TypeScript.</footer>;
+	return <footer>Built by Titan with React and TypeScript.</footer>;
 }

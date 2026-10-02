@@ -6,7 +6,7 @@ describe("routeHead", () => {
 	it("declares title, description, canonical, and OG/Twitter tags", () => {
 		const head = routeHead({
 			path: "/projects/private-movie",
-			title: "Private Movie — Case Study | Titanic",
+			title: "Private Movie — Case Study | Titan",
 			description: "Case study.",
 		});
 		const meta = head.meta as Array<Record<string, string>>;

@@ -16,7 +16,7 @@ describe("CaseStudyPage", () => {
 		render(<CaseStudyPage />);
 		for (const name of [
 			"Problem",
-			"Titanic's Role",
+			"Titan's Role",
 			"Architecture",
 			"Tech Stack",
 			"Outcome",

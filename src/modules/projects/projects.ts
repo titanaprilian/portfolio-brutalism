@@ -31,7 +31,7 @@ export const otherProjects: Project[] = [
 			"A production-grade API built with Elysia, Bun, Drizzle and Postgres. Code is split into deep modules and covered by three tiers of tests.",
 		tags: ["Elysia", "Bun", "Drizzle", "Postgres"],
 		// TODO: wired to siteConfig.monorepoBackendRepoUrl in ProjectsSection
-		href: "https://github.com/titanic/monorepo-backend",
+		href: "https://github.com/titanaprilian/monorepo-backend",
 		external: true,
 		linkLabel: "View the repo",
 	},
@@ -41,7 +41,7 @@ export const otherProjects: Project[] = [
 			"A GitHub-based workflow where AI agents coordinate through SKILL.md files, so work moves between them in a predictable way.",
 		tags: ["GitHub", "SKILL.md", "AI agents"],
 		// TODO: wired to siteConfig.multiAgentWorkflowRepoUrl in ProjectsSection
-		href: "https://github.com/titanic/multi-agent-workflow",
+		href: "https://github.com/titanaprilian/multi-agent-workflow",
 		external: true,
 		linkLabel: "View the repo",
 	},

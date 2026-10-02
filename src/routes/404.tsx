@@ -7,9 +7,9 @@ export const Route = createFileRoute("/404")({
 	head: () =>
 		routeHead({
 			path: "/404",
-			title: "404 — Page Not Found | Titanic",
+			title: "404 — Page Not Found | Titan",
 			description:
-				"The page you are looking for does not exist. Return to Titanic's portfolio.",
+				"The page you are looking for does not exist. Return to Titan's portfolio.",
 		}),
 });
 

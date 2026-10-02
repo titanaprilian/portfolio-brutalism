@@ -14,22 +14,23 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-	// TODO: replace with Titanic's real production domain (the `.me` domain)
+	// TODO: replace with Titan's real production domain (the `.me` domain)
 	siteUrl: "https://titanic.me",
 	email: "hello@yourdomain.me",
-	// TODO: replace with Titanic's real GitHub profile URL
-	githubUrl: "https://github.com/titanic",
-	// TODO: replace with Titanic's real LinkedIn profile URL
-	linkedinUrl: "https://www.linkedin.com/in/titanic",
+	// TODO: replace with Titan's real GitHub profile URL
+	githubUrl: "https://github.com/titanaprilian",
+	// TODO: replace with Titan's real LinkedIn profile URL
+	linkedinUrl: "https://www.linkedin.com/in/titanaprilian",
 	cvPath: "/titanic-cv.pdf",
-	name: "Titanic",
+	name: "Titan",
 	role: "Junior full-stack developer",
 	tagline: "I build web apps in TypeScript, from the database to the screen.",
 	availability: "Available now for roles and internships",
 	// TODO: replace with the real live Private Movie URL
 	livePrivateMovieUrl: "https://private-movie.titanic.me",
 	// TODO: replace with the real Monorepo backend repo URL
-	monorepoBackendRepoUrl: "https://github.com/titanic/monorepo-backend",
+	monorepoBackendRepoUrl: "https://github.com/titanaprilian/monorepo-backend",
 	// TODO: replace with the real Multi-agent workflow repo URL
-	multiAgentWorkflowRepoUrl: "https://github.com/titanic/multi-agent-workflow",
+	multiAgentWorkflowRepoUrl:
+		"https://github.com/titanaprilian/multi-agent-workflow",
 };

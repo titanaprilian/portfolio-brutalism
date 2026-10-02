@@ -7,7 +7,7 @@ export const Route = createFileRoute("/projects/private-movie")({
 	head: () =>
 		routeHead({
 			path: "/projects/private-movie",
-			title: "Private Movie — Case Study | Titanic",
+			title: "Private Movie — Case Study | Titan",
 			description:
 				"Case study of Private Movie: problem, role, architecture, stack, and outcome.",
 		}),

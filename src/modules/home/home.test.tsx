@@ -10,7 +10,7 @@ describe("HomePage", () => {
 	it("renders identity, role, and availability badge", () => {
 		renderHome();
 		expect(
-			screen.getByRole("heading", { name: "Titanic", level: 1 }),
+			screen.getByRole("heading", { name: "Titan", level: 1 }),
 		).toBeInTheDocument();
 		expect(screen.getByText("Junior full-stack developer")).toBeInTheDocument();
 		expect(
@@ -82,7 +82,17 @@ describe("HomePage", () => {
 			"mailto:hello@yourdomain.me",
 		);
 		expect(
-			screen.getByText("Built by Titanic with React and TypeScript."),
+			screen.getByText("Built by Titan with React and TypeScript."),
 		).toBeInTheDocument();
+	});
+
+	it("renders accessible sidebar social icons linking to real profiles", () => {
+		renderHome();
+		expect(
+			screen.getByRole("link", { name: "GitHub profile" }),
+		).toHaveAttribute("href", "https://github.com/titanaprilian");
+		expect(
+			screen.getByRole("link", { name: "LinkedIn profile" }),
+		).toHaveAttribute("href", "https://www.linkedin.com/in/titanaprilian");
 	});
 });
