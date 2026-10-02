@@ -1,6 +1,6 @@
 ---
 name: pragmatic-code-review
-description: "Review the work another agent produced while implementing a ticket (a branch, PR, or diff) for code smells and design problems using core Pragmatic Programmer principles (DRY as knowledge duplication, orthogonality/coupling, broken windows, tracer bullets, reversibility, programming by coincidence, design by contract, YAGNI/good-enough software) plus this user's Deep Modules convention. Checks the implementation against the ticket's acceptance criteria, then produces a structured, non-interactive findings report with a verdict (approve / approve with follow-ups / request changes) that the implementing agent or a human can act on. When the verdict is an approval, closes the ticket automatically without asking for confirmation. Use whenever an agent is asked to review, audit, or critique another agent's implementation of a ticket, or to find smells in a changed app/module before merge."
+description: "Review the work another agent produced while implementing a ticket (a branch, PR, or diff) for code smells and design problems using core Pragmatic Programmer principles (DRY as knowledge duplication, orthogonality/coupling, broken windows, tracer bullets, reversibility, programming by coincidence, design by contract, YAGNI/good-enough software) plus this user's Deep Modules convention. Checks the implementation against the ticket's acceptance criteria, then produces a structured, non-interactive findings report with a verdict (approve / approve with follow-ups / request changes) that the implementing agent or a human can act on. When the verdict is an approval, commits the changes and closes the ticket automatically without asking for confirmation. Use whenever an agent submits a ticket for review, a PR is ready to check, or you are asked to review an implementation against a ticket or spec."
 ---
 
 # Pragmatic Code Review
@@ -18,8 +18,9 @@ Rules of engagement:
   something is ambiguous, record it as an assumption or an open question in the
   report and keep going.
 - **Review the change, not the whole codebase.** Stay anchored to the ticket.
-- **Approval closes the ticket automatically** (Step 5) — no confirmation from
-  the user is needed. This is the only action beyond writing the report.
+- **Approval commits changes and closes the ticket automatically** (Step 5) —
+  no confirmation from the user is needed. These are the only actions beyond
+  writing the report.
 
 ## Step 1 — Establish scope
 
@@ -124,28 +125,43 @@ Verdict rules:
 Omit any empty section rather than writing "none," except the verdict,
 acceptance criteria, and assumptions line, which are always present.
 
-## Step 5 — Close the ticket on approval
+## Step 5 — Commit and close the ticket on approval
 
-If the verdict is **Approve** or **Approve with follow-ups**, close the ticket
-**immediately and without asking the user for confirmation** — the approval is
-the go-ahead. Post the report and close in one step, e.g.:
+If the verdict is **Approve** or **Approve with follow-ups**, commit the approved
+changes and close the ticket **immediately and without asking the user for
+confirmation** — the approval is the go-ahead.
 
+### 1. Commit the approved changes
+If the changes for the ticket are uncommitted in the working tree:
+1. Stage the files belonging to the ticket:
+   ```bash
+   git add <file1> <file2> ...
+   ```
+   Only stage files relevant to the reviewed ticket; do not stage scratch files or
+   unrelated untracked artifacts.
+2. Commit with a conventional commit message referencing the ticket number:
+   ```bash
+   git commit -m "<type>(<scope>): <summary> (#<n>)"
+   ```
+   (e.g., `fix(layout): prevent horizontal scroll on theme toggle hover (#1)`).
+
+### 2. Close the ticket
+Post the report and close the ticket:
+```bash
+gh issue comment <n> --body-file <report.md>
+gh issue close <n> --reason completed
 ```
-gh issue close <n> --reason completed --comment-file <report.md>
-```
-
-(or `gh issue comment <n> --body-file <report.md>` followed by
-`gh issue close <n> --reason completed` if the flag isn't available).
 
 - Include the full report in the closing comment so the follow-ups and
   non-blocking findings stay attached to the ticket.
-- If the verdict is **Request changes**, do **not** close the ticket. Post the
-  report as a comment and leave the ticket open for the implementer.
+- If the verdict is **Request changes**, do **not** commit and do **not** close
+  the ticket. Post the report as a comment and leave the ticket open for the
+  implementer.
 - Closing the ticket does not include merging the PR or deleting the branch;
   leave those to the normal workflow unless the invoking task says otherwise.
-- If the close command fails (permissions, wrong repo, already closed), report
-  the error at the end of your reply rather than retrying in a loop.
-
+- If the close or commit command fails (permissions, wrong repo, already closed,
+  git hook rejection), report the error at the end of your reply rather than
+  retrying in a loop.
 ## Step 6 — Stop
 
 The review ends with the report and, on approval, the closed ticket. Do not
