@@ -30,8 +30,9 @@ export const privateMovieCaseStudy: CaseStudy = {
 			id: "problem",
 			heading: "Problem",
 			paragraphs: [
-				"Browsing and managing a personal movie catalog across TV and web clients means keeping one consistent source of truth for titles, artwork, and playback state.",
-				"Private Movie addresses this with a backend-for-frontend Elysia API that serves both an Android TV client and a React 19 web admin panel from the same PostgreSQL catalog.",
+				"Commercial TV streaming subscriptions keep piling up — one more service, one more monthly bill — just to watch movies spread across platforms you don't control.",
+				"The free alternative is worse on a TV: browser-based playback with tiny controls, broken fullscreen, and intrusive ad-click scripts that hijack taps into popups and redirects instead of playing the movie.",
+				"Private Movie is built open source so anyone can fix this for themselves: clone the repo, self-host the stack, and run your own private streaming service with a native TV playback experience and no ad-click traps.",
 			],
 		},
 		{
