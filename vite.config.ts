@@ -14,7 +14,7 @@ const config = defineConfig({
 				autoSubfolderIndex: true,
 				crawlLinks: true,
 				failOnError: true,
-				// Skip static assets the crawler discovers (e.g. /titanic-cv.pdf)
+				// Skip static assets the crawler discovers (e.g. /titanaprilian-cv.pdf)
 				filter: ({ path }) => !/\.(pdf|png|xml|txt|ico)$/.test(path),
 			},
 			pages: [

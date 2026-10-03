@@ -10,7 +10,7 @@ const sidebar: SidebarProps = {
 		{ href: "#about", label: "About" },
 		{ href: "#projects", label: "Projects" },
 	],
-	bottom: <a href="/titanic-cv.pdf">Download CV</a>,
+	bottom: <a href="/titanaprilian-cv.pdf">Download CV</a>,
 };
 
 function renderLayout() {

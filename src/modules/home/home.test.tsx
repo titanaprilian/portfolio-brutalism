@@ -118,7 +118,7 @@ describe("HomePage", () => {
 		const cvLinks = screen.getAllByRole("link", { name: "Download CV" });
 		expect(cvLinks.length).toBeGreaterThanOrEqual(2);
 		for (const link of cvLinks) {
-			expect(link).toHaveAttribute("href", "/titanic-cv.pdf");
+			expect(link).toHaveAttribute("href", "/titanaprilian-cv.pdf");
 		}
 		const emailLinks = screen.getAllByRole("link", { name: "Email me" });
 		expect(emailLinks.length).toBeGreaterThanOrEqual(2);
@@ -144,7 +144,7 @@ describe("HomePage", () => {
 		).toHaveAttribute("href", "mailto:titanaprilian73@gmail.com");
 		expect(
 			within(card as HTMLElement).getByRole("link", { name: "Download CV" }),
-		).toHaveAttribute("href", "/titanic-cv.pdf");
+		).toHaveAttribute("href", "/titanaprilian-cv.pdf");
 		const footer = screen
 			.getByText("Built by Titan with React and TypeScript.")
 			.closest("footer");

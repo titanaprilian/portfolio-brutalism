@@ -20,7 +20,7 @@ export const siteConfig: SiteConfig = {
 	githubUrl: "https://github.com/titanaprilian",
 	// TODO: replace with Titan's real LinkedIn profile URL
 	linkedinUrl: "https://www.linkedin.com/in/titanaprilian",
-	cvPath: "/titanic-cv.pdf",
+	cvPath: "/titanaprilian-cv.pdf",
 	name: "Titan",
 	role: "Junior full-stack developer",
 	tagline: "I build web apps in TypeScript, from the database to the screen.",
